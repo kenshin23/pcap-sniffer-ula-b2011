@@ -4,8 +4,11 @@
 
 #include <arpa/inet.h>
 
-Flow::Flow(u_int32_t sourceAddr, u_int16_t sourcePort, u_int32_t destAddr, u_int16_t destPort,
-           std::string application )
+Flow::Flow( u_int32_t sourceAddr, 
+            u_int16_t sourcePort, 
+            u_int32_t destAddr, 
+            u_int16_t destPort,
+            std::string application )
 {
     this->sourceAddr  = sourceAddr;
     this->sourcePort = sourcePort;
@@ -23,7 +26,10 @@ Flow::Flow(u_int32_t sourceAddr, u_int16_t sourcePort, u_int32_t destAddr, u_int
     outPacketsCount = 0;
 }
 
-Flow::Flow(u_int32_t sourceAddr, u_int16_t sourcePort, u_int32_t destAddr, u_int16_t destPort)
+Flow::Flow( u_int32_t sourceAddr, 
+            u_int16_t sourcePort, 
+            u_int32_t destAddr, 
+            u_int16_t destPort)
 {
     this->sourceAddr  = sourceAddr;
     this->sourcePort = sourcePort;
@@ -43,14 +49,14 @@ Flow::Flow(u_int32_t sourceAddr, u_int16_t sourcePort, u_int32_t destAddr, u_int
 
 bool Flow::operator == (const Flow f)
 {
-    return ( (sourceAddr  == f.sourceAddr ) and
+    return ( (sourceAddr == f.sourceAddr) and
              (sourcePort == f.sourcePort) and
-             (destAddr  == f.destAddr ) and
+             (destAddr   == f.destAddr  ) and
              (destPort   == f.destPort  ) )
     or
-           ( (sourceAddr  == f.destAddr ) and
+           ( (sourceAddr == f.destAddr  ) and
              (sourcePort == f.destPort  ) and
-             (destAddr  == f.sourceAddr ) and
+             (destAddr   == f.sourceAddr) and
              (destPort   == f.sourcePort) );
 }
 
@@ -170,6 +176,8 @@ void Flow::setRemoteHostService(std::string rtmHostService){
 
     this->rtmHostService = rtmHostService;
 }
+
 std::string Flow::getRtmHostService(){
-return rtmHostService;
+    
+    return rtmHostService;
 }

@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <getopt.h>
 #include <sys/timeb.h>
@@ -23,12 +22,11 @@
 #define DAY 86400
 #define HOUR 3600
 #define MINUTE 60
+
 using namespace std;
 
-// Esto es sencillamente despreciable, peeeero...
 // static struct timeb t_start, t_current, t_stop;
 static struct timeb t_stop;
-
 
 void findAppByPort(std::string        line,
                    std::string        ip,
@@ -137,7 +135,7 @@ void findAppByPort(std::string        line,
 
     // aqui hago el mapeo
     mapeo[lclPort] = app;
-}    // fin findAppByport
+}   // fin findAppByport
 
 void netStatQueryFindApp(std::string        ip,
                          map<int, string> & mapeo)
@@ -228,7 +226,6 @@ void lookForInitiatedFlows(std::string        line,
         while (aux == " ")
         {
             k++;
-
             aux = line.substr(k, 1);
         }
 
@@ -238,7 +235,6 @@ void lookForInitiatedFlows(std::string        line,
         while (aux != ":")
         {
             j++;
-
             aux = line.substr(j, 1);
         }
 
@@ -256,7 +252,6 @@ void lookForInitiatedFlows(std::string        line,
         {
             j++;
             countRemotePort++;
-
             aux = line.substr(j, 1);
         }
 
@@ -273,7 +268,6 @@ void lookForInitiatedFlows(std::string        line,
         {
             k++;
             appCount++;
-
             aux = line.substr(k, 1);
         }
 
@@ -319,7 +313,7 @@ void netStatQueryForInitFlows(std::string        ip,
 
     /*
      *  Se abre el COMANDO
-     *    que se ha podido abrir correctamente
+     *  que se ha podido abrir correctamente
      */
     fichero = popen("netstat -ntp |grep ESTABLECIDO", "r");
 
@@ -335,7 +329,6 @@ void netStatQueryForInitFlows(std::string        ip,
     {
         // cout << aux <<endl;
         line.append(aux);
-
         /* *tengo la linea* */
         lookForInitiatedFlows(line, ip, mapeo, &core);
         fgets(aux, 1000, fichero);
@@ -385,7 +378,6 @@ void * run(void * ptr)
         while (not my_data -> pcap.getCapturedPackets().empty())
         {
             PacketHeader packet = my_data -> pcap.getCapturedPackets().front();
-
             my_data -> pcap.getCapturedPackets().pop();
             my_data -> core.processPacket(packet);
         }
@@ -405,10 +397,10 @@ void * run(void * ptr)
             }
 
             my_data -> core.setAppName(i, app_name);
-        }    // endfor;
+        }   // endfor;
 
         ftime(&t_current);
-    }        // endwhile;
+    }   // endwhile;
 
     // terminar de procesar lo que queda en la cola de paquetes
     while (not my_data -> pcap.getCapturedPackets().empty())
@@ -424,7 +416,7 @@ void * run(void * ptr)
     exit(0);
 
     // my_data->pcap.stopCapture();
-}    // end timerEvent
+}   // end timerEvent
 
 // --------------------------------------------------------------------------------------------------
 
@@ -485,10 +477,10 @@ int main(int     argc,
     {
         /* Estas opciones activan una bandera. */
         {
-            "help", no_argument, &dspl_hlp_flag, 1
+            "help",         no_argument, &dspl_hlp_flag, 1
         },
         {
-            "version", no_argument, &dspl_ver_flag, 1
+            "version",      no_argument, &dspl_ver_flag, 1
         },
 
         /*
@@ -496,33 +488,36 @@ int main(int     argc,
          *   Las distinguimos por sus indices.
          */
         {
-            "count", required_argument, 0, 'c'
+            "count",        required_argument, 0, 'c'
         },
         {
-            "td", required_argument, 0, 'D'
+            "td",           required_argument, 0, 'D'
         },
         {
-            "filter", required_argument, 0, 'f'
+            "filter",       required_argument, 0, 'f'
         },
         {
-            "th", required_argument, 0, 'H'
+            "graph",        required_argument, 0, 'g'
         },
         {
-            "interface", required_argument, 0, 'i'
+            "th",           required_argument, 0, 'H'
         },
         {
-            "tm", required_argument, 0, 'M'
+            "interface",    required_argument, 0, 'i'
         },
         {
-            "ts", required_argument, 0, 'S'
+            "tm",           required_argument, 0, 'M'
         },
         {
-            "write", required_argument, 0, 'w'
+            "ts",           required_argument, 0, 'S'
+        },
+        {
+            "write",        required_argument, 0, 'w'
         },
         {
             0, 0, 0, 0
         }    // Necesario para finalizar el conjunto de opciones.
-    };       // end static struct option long_options
+    };  // end static struct option long_options
 
 
     // Inicializar los argumentos a sus respectivas opciones:
@@ -545,12 +540,13 @@ int main(int     argc,
         {
             case 0:
 
-                /* Si esta opcion activo una bandera, no hacer mas nada.. */
+                /* Si esta opcion activo una bandera, no hacer mas nada. */
                 if (long_options[option_index].flag != 0)
                 {
                     break;
                 }
-
+                
+                /* //Ejemplo de uso de las opciones de parametros:
                 printf("option %s", long_options[option_index].name);
 
                 if (optarg)
@@ -559,11 +555,10 @@ int main(int     argc,
                 }
 
                 printf("\n");
-
+                */
                 break;
 
             case 'c':
-
                 // TODO:
                 break;
 
@@ -574,7 +569,12 @@ int main(int     argc,
                 break;
 
             case 'f':
+                // TODO:
+                break;
 
+                
+            case 'g':
+                //Parte de los filtros de graficacion:
                 // TODO:
                 break;
 
@@ -585,7 +585,6 @@ int main(int     argc,
                 break;
 
             case 'i':
-
                 // TODO:
                 break;
 
@@ -602,20 +601,18 @@ int main(int     argc,
                 break;
 
             case 'w':
-
                 // Declaracion de la variable filename, usada en core.h
                 // TODO:
                 break;
 
             case '?':
-
-                /* getopt_long ya imprimio un mensaje de error. */
+                /* getopt_long ya imprimio un mensaje de error en este punto. */
                 break;
 
             default:
                 abort();
         }
-    }    // endwhile;
+    }   // endwhile;
 
     if (dspl_hlp_flag)
     {
@@ -662,8 +659,8 @@ int main(int     argc,
     dato.pcap.startCapture();
     pthread_exit(NULL);
 
+    //TODO:
+    //Ver si aca es un buen lugar para agregar las gráficas generadas, o antes:
+
     return 0;
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com

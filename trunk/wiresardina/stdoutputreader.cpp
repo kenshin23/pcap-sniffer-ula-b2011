@@ -1,4 +1,3 @@
-
 #include "stdoutputreader.h"
 
 StdOutputReader::StdOutputReader()
@@ -32,7 +31,7 @@ std::string StdOutputReader::getLines()
     char aux[1000];
 
     /*
-     *  Se abre el COMANDO
+     * Se abre el COMANDO
      * que se ha podido abrir correctamente
      */
     fichero = popen("netstat -ntp", "r");
@@ -44,7 +43,7 @@ std::string StdOutputReader::getLines()
     }
 
     /*
-     *  Se lee la primera linea y se hace un bucle, hasta fin de fichero,
+     * Se lee la primera linea y se hace un bucle, hasta fin de fichero,
      * para ir sacando por pantalla los resultados.
      */
     fgets(aux, 1000, fichero);
@@ -52,7 +51,6 @@ std::string StdOutputReader::getLines()
     while (!feof(fichero))
     {
         cout << aux << endl;
-
         fgets(aux, 1000, fichero);
     }
 
@@ -88,6 +86,3 @@ std::string StdOutputReader::netstat_tnpUbuntu()
     reader.getLine(1);
 }
 */
-
-
-//~ Formatted by Jindent --- http://www.jindent.com
