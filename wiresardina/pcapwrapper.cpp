@@ -1,4 +1,3 @@
-
 #include "pcapwrapper.h"
 
 // #include "stdoutputreader.h"
@@ -155,7 +154,8 @@ void PcapWrapper::stopCapture()
 }
 
 void PcapWrapper::run()
-{    // char device[] = "wlan0";
+{   
+    // char device[] = "wlan0";
     handler = pcap_open_live(interfaceName.c_str(), BUFSIZ, false, LOOP_FOREVER, err);
 
     // -------------------------------------------ES Necesario ser Super Usuario---------------------------------------------
@@ -184,6 +184,3 @@ std::string PcapWrapper::stdOutputReader(std::string cmd)
     // exit
     return data;
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com
