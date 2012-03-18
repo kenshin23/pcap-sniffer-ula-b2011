@@ -3,11 +3,11 @@ UNIX Daemon Server
 Rafael Solorzano 16/01/2012
 
 para compilar:	gcc -o demonio demonio.c
-para correr:		./demonio
+para correr:	./demonio
 test daemon:	ps -ef|grep demonio (or ps -aux on BSD systems)
-test log:	tail -f /tmp/sniffer.log
+test log:		tail -f /tmp/sniffer.log
 test signal:	kill -HUP `cat /tmp/sniffer.lock`
-terminar:	kill `cat /tmp/sniffer.lock`
+terminar:		kill `cat /tmp/sniffer.lock`
 */
 
 #include <sys/types.h>
@@ -39,7 +39,7 @@ using namespace std;
 using namespace std;
 
 void log_message(char *filename,char *message){
-FILE *logfile;
+	FILE *logfile;
 	logfile=fopen(filename,"a");
 	if(!logfile) return;
 	fprintf(logfile,"%s\n",message);
@@ -418,7 +418,7 @@ int main(void) {
         signal(SIGHUP,signal_handler);
         signal(SIGTERM,signal_handler); 
         
-        /* Daemon-specific initialization goes here */
+	/* Daemon-specific initialization goes here */
     thread_data dato;
     std::string ip = dato.pcap.getHostIpAddres();
     dato.core.setIp(ip);
@@ -426,24 +426,20 @@ int main(void) {
     pthread_t thread;
 
     //ver los flujos iniciados
+	
+	/* The Big Loop */
 
-
-
-
-        /* The Big Loop */
-
-           /* Do some task here ... */
-        //captureFile(mapeo);
-        int i = pthread_create(&thread, NULL, timerEvent , (void *)&dato);
-        netStatQueryForInitFlows(dato.ip,dato.mapeo,dato.core);
-        dato.pcap.startCapture();
-//        while (1){
+    /* Do some task here ... */
+    //captureFile(mapeo);
+    int i = pthread_create(&thread, NULL, timerEvent , (void *)&dato);
+    netStatQueryForInitFlows(dato.ip,dato.mapeo,dato.core);
+    dato.pcap.startCapture();
+//  while (1){
 //
 //
 //
 //
-//          }
-          pthread_exit(NULL);
-            //flush();
-
+//  }
+    pthread_exit(NULL);
+    //flush();
 }
