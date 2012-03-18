@@ -1,7 +1,11 @@
 COMPILER = g++
 CCFLAGS = -g
-ejecutable : main2.cpp packetheader.o core.o flow.o pcapwrapper.o stdoutputreader.o graph.o
-	${COMPILER} ${CCFLAGS} -Wall main2.cpp packetheader.o core.o flow.o pcapwrapper.o stdoutputreader.o -o ejecutable -lpcap -lpthread
+LINK	= -lpcap -lpthread
+OBJECTS		= packetheader.o core.o flow.o pcapwrapper.o stdoutputreader.o graph.o
+MAINFILE	= main2.cpp
+
+ejecutable : $(MAINFILE) $(OBJECTS)
+	${COMPILER} ${CCFLAGS} -Wall $(MAINFILE) $(OBJECTS) $(LINK) -o ejecutable
 
 core.o: core.cpp
 	${COMPILER} ${CCFLAGS} -c core.cpp
@@ -19,11 +23,10 @@ stdoutputreader.o:stdoutputreader.cpp
 	${COMPILER} ${CCFLAGS} -c stdoutputreader.cpp
 		
 graph.o:graph.cpp
-	${COMPILER} ${CCFLAGS} -c graphs/graph.cpp
-
+	${COMPILER} ${CCFLAGS} -c graph.cpp
 
 all : ejecutable
-				
+
 clean:
 	rm -f *.o
 	rm -f *~

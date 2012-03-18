@@ -29,7 +29,6 @@ Core::Core()
     count = 0;
     bandera = true;
     countHoras = 1;
-
 }
 
 Core::Core(std::string fileName )
@@ -57,7 +56,6 @@ Core::Core(std::string fileName )
     count = 0;
     bandera = true;
     countHoras = 1;
-
 }
 
 Core::~Core()
@@ -75,7 +73,6 @@ Core::~Core()
         file << "# Packets:" << getPacketsCount() << ":" << endl;
     file.close();
     filePacktCount.close();
-
 }
 
 void Core::setAppName(int pos, string app)

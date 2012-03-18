@@ -31,7 +31,7 @@
 using namespace std;
 using namespace boost;
 
-string  capture_file_path   = "../capture.txt";
+string  capture_file_path   = "capture.txt";
 
 int     portsToService( map<int,string> &mapeo);
 
