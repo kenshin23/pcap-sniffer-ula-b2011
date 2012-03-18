@@ -19,7 +19,7 @@ stdoutputreader.o:stdoutputreader.cpp
 	${COMPILER} ${CCFLAGS} -c stdoutputreader.cpp
 		
 graph.o:graph.cpp
-	${COMPILER} ${CCFLAGS} -c graphs/graphs.cpp
+	${COMPILER} ${CCFLAGS} -c graphs/graph.cpp
 
 all : ejecutable
 				
