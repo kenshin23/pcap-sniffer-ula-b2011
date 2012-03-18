@@ -774,6 +774,7 @@ int graphAll()
     return 0;
 } //end graphAll()
 
+/* Solo para pruebas con la version individual de este ejecutable:
 int main()
 {
     graphAppKB();
@@ -784,3 +785,4 @@ int main()
 
     return 0;
 }
+*/
